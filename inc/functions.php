@@ -67,4 +67,20 @@ function getProductById($id)
 
 }
 
+
+function addVisitor($data)
+{
+    $conn = connect();
+
+    $req = "INSERT INTO visitors(email,password,firstName,lastName,phone) VALUES ('".$data["email"]."','".$data["password"]."','".$data["firstName"]."','".$data["lastName"]."','".$data["phone"]."')";
+    $res = $conn->query($req);
+    if($res){
+return true;
+    }else{
+        return false;
+    }
+
+
+}
+
 ?>
