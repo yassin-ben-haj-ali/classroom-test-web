@@ -21,17 +21,29 @@
 
                     </ul>
                 </li>
-                <li class="nav-item">
+                <?php if (isset($_SESSION['firstName'])) {
+                    print '<li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="profile.php">Profile</a>
+                </li>';
+                } else {
+                    print '<li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="login.php">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="register.php">Register</a>
-                </li>
+                </li>';
+                } ?>
+
             </ul>
             <form class="d-flex" role="search" action="index.php" method="POST">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            <?php
+            if (isset($_SESSION['firstName'])) {
+                print '<a href="logout.php" class="btn btn-primary">logout</a>';
+            }
+            ?>
         </div>
     </div>
 </nav>

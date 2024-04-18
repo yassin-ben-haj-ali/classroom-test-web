@@ -71,16 +71,27 @@ function getProductById($id)
 function addVisitor($data)
 {
     $conn = connect();
-
-    $req = "INSERT INTO visitors(email,password,firstName,lastName,phone) VALUES ('".$data["email"]."','".$data["password"]."','".$data["firstName"]."','".$data["lastName"]."','".$data["phone"]."')";
+    $password=md5($data['password']);
+    $req = "INSERT INTO visitors(email,password,firstName,lastName,phone) VALUES ('" . $data["email"] . "','" . $password . "','" . $data["firstName"] . "','" . $data["lastName"] . "','" . $data["phone"] . "')";
     $res = $conn->query($req);
-    if($res){
-return true;
-    }else{
+    if ($res) {
+        return true;
+    } else {
         return false;
     }
 
 
 }
+function connectVisitor($data)
+{
+    $conn = connect();
+    $email = $data['email'];
+    $password = md5($data['password']);
+    $req = "SELECT * FROM visitors WHERE email='$email' and password='$password'";
+    $res = $conn->query($req);
+    $user = $res->fetch();
 
+    return $user;
+
+}
 ?>

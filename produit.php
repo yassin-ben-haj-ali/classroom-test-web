@@ -30,7 +30,7 @@ if (isset($_GET['id'])) {
     <!--end nav-->
     <div class="row col-12 mt-4">
         <div class="card col-8 offset-2">
-            <img src="..." class="card-img-top" alt="...">
+            <img src="images/<?php echo $product['image'] ?>" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><?php echo $product['name'] ?></h5>
                 <p class="card-text"><?php echo $product['description'] ?></p>

@@ -32,7 +32,7 @@ if (!empty($_POST)) {
         foreach ($products as $product) {
             print '<div class="col-3">
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="images/'.$product['image'].'" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">' . $product['name'] . '</h5>
                     <p class="card-text">' . $product['description'] . '</p>
