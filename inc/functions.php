@@ -54,4 +54,17 @@ function searchProducts($keyword)
 
 }
 
+
+function getProductById($id)
+{
+    $conn = connect();
+
+    $req = "SELECT * FROM products WHERE id=$id";
+    $res = $conn->query($req);
+    $product = $res->fetch();
+
+    return $product;
+
+}
+
 ?>

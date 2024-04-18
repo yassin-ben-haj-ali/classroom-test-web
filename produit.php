@@ -1,13 +1,12 @@
 <?php
 
+
 include "inc/functions.php";
 
 $categories = getAllCategories();
 
-if (!empty($_POST)) {
-    $products = searchProducts($_POST['search']);
-} else {
-    $products = getAllProducts();
+if (isset($_GET['id'])) {
+    $product = getProductById($_GET['id']);
 }
 
 ?>
@@ -24,30 +23,29 @@ if (!empty($_POST)) {
 </head>
 
 <body>
+    <!--start nav-->
     <?php
     include "inc/header.php";
     ?>
-    <div class="row col-12 mt-3">
-        <?php
-        foreach ($products as $product) {
-            print '<div class="col-3">
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">' . $product['name'] . '</h5>
-                    <p class="card-text">' . $product['description'] . '</p>
-                    <a href="produit.php?id='.$product['id'].'" class="btn btn-primary">details</a>
-                </div>
+    <!--end nav-->
+    <div class="row col-12 mt-4">
+        <div class="card col-8 offset-2">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $product['name'] ?></h5>
+                <p class="card-text"><?php echo $product['description'] ?></p>
             </div>
-        </div>';
-        }
-
-        ?>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><?php echo $product['price'] ?></li>
+                <li class="list-group-item"><?php echo $product['category'] ?></li>
+            </ul>
+        </div>
     </div>
+    <!--start footer-->
     <div class="bg-dark text-center p-5 mt-4">
         <p class="text-white">all rights reserved 2024</p>
-
     </div>
+    <!--end footer-->
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
