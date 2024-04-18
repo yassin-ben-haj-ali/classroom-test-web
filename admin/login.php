@@ -1,22 +1,19 @@
 <?php
 session_start();
-if (isset($_SESSION['firstName'])) {
+if (isset($_SESSION['email'])) {
     header('location:profile.php');
 }
-include "inc/functions.php";
+include "../inc/functions.php";
 
 $categories = getAllCategories();
-$user = true;
+$admin = true;
 if (!empty($_POST)) {
-    $user = connectVisitor($_POST);
+    $admin = connectAdmin($_POST);
 
-    if (is_array($user) && count($user) > 0) {
-        session_start();
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['password'] = $user['password'];
-        $_SESSION['firstName'] = $user['firstName'];
-        $_SESSION['lastName'] = $user['lastName'];
-        $_SESSION['phone'] = $user['phone'];
+    if (is_array($admin) && count($admin) > 0) {
+        Session_start();
+        $_SESSION['email'] = $admin['email'];
+        $_SESSION['password'] = $admin['password'];
 
         header('location:profile.php');
     }
@@ -40,14 +37,9 @@ if (!empty($_POST)) {
 </head>
 
 <body>
-    <!--start nav-->
-    <?php
-    include "inc/header.php";
-    ?>
-    <!--end nav-->
 
     <div class="col-12 p-5">
-        <h1 class="text-center">Login</h1>
+        <h1 class="text-center">Admin Space: login</h1>
         <form action="login.php" method="POST">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -78,7 +70,7 @@ if (!empty($_POST)) {
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <?php
-if (!$user) {
+if (!$admin) {
     print '<script>
         Swal.fire({
             title: "error",

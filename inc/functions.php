@@ -71,7 +71,7 @@ function getProductById($id)
 function addVisitor($data)
 {
     $conn = connect();
-    $password=md5($data['password']);
+    $password = md5($data['password']);
     $req = "INSERT INTO visitors(email,password,firstName,lastName,phone) VALUES ('" . $data["email"] . "','" . $password . "','" . $data["firstName"] . "','" . $data["lastName"] . "','" . $data["phone"] . "')";
     $res = $conn->query($req);
     if ($res) {
@@ -94,4 +94,25 @@ function connectVisitor($data)
     return $user;
 
 }
+
+function connectAdmin($data)
+{
+    $conn = connect();
+    $email = $data['email'];
+    $password = md5($data['password']);
+    $req = "SELECT * FROM admin WHERE email='$email' and password='$password'";
+    $res = $conn->query($req);
+    $admin = $res->fetch();
+
+    return $admin;
+
+}
+
+
+function createCategory($data)
+{
+    
+}
+
+
 ?>
