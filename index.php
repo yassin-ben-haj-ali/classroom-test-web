@@ -1,3 +1,23 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=e-shop", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected successfully";
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+
+$req = "SELECT * FROM categories";
+$res = $conn->query($req);
+$categories = $res->fetchAll();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,15 +46,12 @@
                             Categories
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Category 1</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Category 2</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Category 3</a></li>
+                            <?php
+                            foreach ($categories as $category) {
+                                print '<li><a class="dropdown-item" href="#">'.$category['name'].'</a></li>';
+                            }
+                            ?>
+                           
                         </ul>
                     </li>
                     <li class="nav-item">
